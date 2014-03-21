@@ -1,4 +1,4 @@
-package com.example
+package edu.luc.etl.ccacw.sensor.service
 
 import akka.actor.Actor
 import spray.routing._
