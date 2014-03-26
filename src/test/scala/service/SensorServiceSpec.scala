@@ -5,10 +5,10 @@ import spray.testkit.Specs2RouteTest
 import spray.http._
 import StatusCodes._
 
-class MyServiceSpec extends Specification with Specs2RouteTest with MyService {
+class SensorServiceSpec extends Specification with Specs2RouteTest with SensorService {
   def actorRefFactory = system
   
-  "MyService" should {
+  "SensorService" should {
 
     "return a greeting for GET requests to the root path" in {
       Get() ~> myRoute ~> check {

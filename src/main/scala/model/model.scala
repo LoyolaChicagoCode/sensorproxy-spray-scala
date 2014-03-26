@@ -21,36 +21,37 @@ trait Identifiable {
  */
 case class Location(name: String, devices: Device*) extends Resource
 
-/** A device with readable settings and measurements. */
+/** A device abstraction with readable settings and measurements. */
 trait Device extends Resource with Identifiable {
-  def address: InetSocketAddress
+  def hostname: String
+  def port: Int
   def settings: Map[String, String]
   def measurements: Map[String, Map[String, () => Float]]
 }
 
-/** A MODBUS device abstraction with settings and register-based measurements. */
+/** A MODBUS device descriptor with settings and register-based measurements. */
 trait ModbusDevice extends Device {
-  def deviceSettings: Map[String, Map[Boolean, String]]
+  def deviceSettings: Map[String, Pair[String, String]]
   def measurementRegisters: Map[String, Map[String, Int]]
 }
 
 /**
- * Companion object defining a suitable constructor type as an
- * implicit argument for the device factory.
+ * Companion object for defining a suitable constructor type as an
+ * implicit argument to the device factory methods.
  */
 object ModbusDevice {
   type Ctor = (
-    String, String, InetSocketAddress,
-      Map[String, Map[Boolean, String]],
-      Map[String, Map[String, Int]]
-    ) => ModbusDevice
+    String, String, String, Int,
+    Map[String, Map[Boolean, String]],
+    Map[String, Map[String, Int]]
+  ) => ModbusDevice
 }
 
 /** A MODBUS device mixin implementation with simulated readings. */
 trait SimulatedModbusReadings extends ModbusDevice {
   def settings = deviceSettings mapValues { _(false) }
   def measurements = measurementRegisters mapValues {
-  _.mapValues(_ => () => 100 * scala.math.random.toFloat)
+    _.mapValues(_ => () => 100 * scala.math.random.toFloat)
   }
 }
 
@@ -58,7 +59,8 @@ trait SimulatedModbusReadings extends ModbusDevice {
 case class SimulatedModbusDevice(
   name: String,
   id: String,
-  address: InetSocketAddress,
+  hostname: String,
+  port: Int,
   deviceSettings: Map[String, Map[Boolean, String]],
   measurementRegisters: Map[String, Map[String, Int]]
 ) extends ModbusDevice with SimulatedModbusReadings

@@ -7,7 +7,7 @@ import model.ModbusDevice
 object Devices {
 
   def mk42i(name: String, id: String, hostname: String, port: Int)(implicit ctor: ModbusDevice.Ctor) = ctor(
-    name, id, new InetSocketAddress(hostname, port),
+    name, id, hostname, port,
     Map(
       "unit" -> Map(false -> "ppb", true -> "ug/m3")
     ),
@@ -19,9 +19,9 @@ object Devices {
   )
 
   def mk49i(name: String, id: String, hostname: String, port: Int)(implicit ctor: ModbusDevice.Ctor) = ctor(
-    name, id, new InetSocketAddress(hostname, port),
+    name, id, hostname, port,
     Map(
-      "unit" -> Map(false -> "ppb", true -> "ug/m3")
+      "unit" -> Pair("ppb", "ug/m3")
     ),
     Map(
       "o3"  -> Map("current" -> 0, "min" -> 10, "max" -> 20)
