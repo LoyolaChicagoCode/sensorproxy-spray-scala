@@ -12,8 +12,12 @@ Implemented in Scala using spray and Scalaz.
 
 Make sure you have `sbt` version 0.12.3 or later.
 
+To build and start the service:
+
     $ sbt stage
     $ foreman start
+
+Now you can access the service like so:
 
     $ curl localhost:5000/devices/1
 
