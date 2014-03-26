@@ -22,7 +22,7 @@ then please use [this workaround](http://laufer.tumblr.com/post/80793055563).
 
 # Sample instance
 
-A [sample instance](http://luc-sensorproxy-spray.herokuapp.com) is available on Heroku.
+A [sample instance](http://luc-sensorproxy-spray.herokuapp.com/devices/1) is available on Heroku.
 
 # References
 
