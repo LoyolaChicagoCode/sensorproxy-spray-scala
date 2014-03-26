@@ -42,14 +42,14 @@ trait ModbusDevice extends Device {
 object ModbusDevice {
   type Ctor = (
     String, String, String, Int,
-    Map[String, Map[Boolean, String]],
+    Map[String, Pair[String, String]],
     Map[String, Map[String, Int]]
   ) => ModbusDevice
 }
 
 /** A MODBUS device mixin implementation with simulated readings. */
 trait SimulatedModbusReadings extends ModbusDevice {
-  def settings = deviceSettings mapValues { _(false) }
+  def settings = deviceSettings mapValues { _._1 }
   def measurements = measurementRegisters mapValues {
     _.mapValues(_ => () => 100 * scala.math.random.toFloat)
   }
@@ -61,6 +61,6 @@ case class SimulatedModbusDevice(
   id: String,
   hostname: String,
   port: Int,
-  deviceSettings: Map[String, Map[Boolean, String]],
+  deviceSettings: Map[String, Pair[String, String]],
   measurementRegisters: Map[String, Map[String, Int]]
 ) extends ModbusDevice with SimulatedModbusReadings

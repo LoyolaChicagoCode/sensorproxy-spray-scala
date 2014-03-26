@@ -9,7 +9,7 @@ object Devices {
   def mk42i(name: String, id: String, hostname: String, port: Int)(implicit ctor: ModbusDevice.Ctor) = ctor(
     name, id, hostname, port,
     Map(
-      "unit" -> Map(false -> "ppb", true -> "ug/m3")
+      "unit" -> Pair("ppb", "ug/m3")
     ),
     Map(
       "no"  -> Map("current" -> 0, "min" -> 10, "max" -> 20),
