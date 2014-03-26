@@ -41,12 +41,13 @@ trait ModbusDevice extends Device {
   def measurementRegisters: Map[String, Map[String, Int]]
 }
 
-/**
- * Companion object for defining a suitable constructor type as an
- * implicit argument to the device factory methods.
- */
+/** Companion object for MODBUS device trait. */
 object ModbusDevice {
-  type Ctor[D] = (
+  /**
+   * Constructor type as an implicit argument to the device factory methods.
+   * Generic in the result type to make downcasting unnecessary.
+   */
+  type Ctor[+D] = (
     String, String, String, Int,
     Map[String, Pair[String, String]],
     Map[String, Map[String, Int]]
