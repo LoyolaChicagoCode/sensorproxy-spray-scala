@@ -3,10 +3,11 @@
 A RESTful web service for exposing a collection of network-capable
 environmental monitoring devices as a hierarchical resource.
 
-Because CUERP's real MODBUS-compatible devices are offline indefinitely,
-this service provides simulated readings.
+Because CUERP's real MODBUS-compatible devices have been offline
+indefinitely, this service will provide simulated readings.
 
-Implemented in Scala using spray and Scalaz.
+Implemented in [Scala](http://scala-lang.org) using
+[spray](http://spray.io) and [Scalaz](https://github.com/scalaz/scalaz).
 
 # Build & Run
 
