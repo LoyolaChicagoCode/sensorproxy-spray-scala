@@ -1,7 +1,6 @@
 package edu.luc.etl.ccacw.sensor
 package data
 
-import java.net.InetSocketAddress
 import model.ModbusDevice
 
 object Devices {

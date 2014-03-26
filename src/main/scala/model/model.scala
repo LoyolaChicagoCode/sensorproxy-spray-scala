@@ -23,10 +23,16 @@ case class Location(name: String, devices: Device*) extends Resource
 
 /** A device abstraction with readable settings and measurements. */
 trait Device extends Resource with Identifiable {
-  def hostname: String
-  def port: Int
+  def address: InetSocketAddress
   def settings: Map[String, String]
   def measurements: Map[String, Map[String, () => Float]]
+}
+
+/** A mixin for producing a network address from hostname and port. */
+trait HasInetAddress {
+  def hostname: String
+  def port: Int
+  def address = new InetSocketAddress(hostname, port)
 }
 
 /** A MODBUS device descriptor with settings and register-based measurements. */
@@ -49,8 +55,8 @@ object ModbusDevice {
 
 /** A MODBUS device mixin implementation with simulated readings. */
 trait SimulatedModbusReadings extends ModbusDevice {
-  def settings = deviceSettings mapValues { _._1 }
-  def measurements = measurementRegisters mapValues {
+  override def settings = deviceSettings mapValues { _._1 }
+  override def measurements = measurementRegisters mapValues {
     _.mapValues(_ => () => 100 * scala.math.random.toFloat)
   }
 }
@@ -63,4 +69,4 @@ case class SimulatedModbusDevice(
   port: Int,
   deviceSettings: Map[String, Pair[String, String]],
   measurementRegisters: Map[String, Map[String, Int]]
-) extends ModbusDevice with SimulatedModbusReadings
+) extends SimulatedModbusReadings with HasInetAddress
