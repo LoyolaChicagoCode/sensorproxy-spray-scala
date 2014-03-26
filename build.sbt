@@ -30,3 +30,5 @@ libraryDependencies ++= {
 }
 
 seq(Revolver.settings: _*)
+
+seq(com.typesafe.sbt.SbtStartScript.startScriptForClassesSettings: _*)

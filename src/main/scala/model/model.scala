@@ -46,11 +46,11 @@ trait ModbusDevice extends Device {
  * implicit argument to the device factory methods.
  */
 object ModbusDevice {
-  type Ctor = (
+  type Ctor[D] = (
     String, String, String, Int,
     Map[String, Pair[String, String]],
     Map[String, Map[String, Int]]
-  ) => ModbusDevice
+  ) => D
 }
 
 /** A MODBUS device mixin implementation with simulated readings. */

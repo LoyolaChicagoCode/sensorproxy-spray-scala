@@ -6,7 +6,7 @@ import model._
 
 package object data {
 
-  implicit val ctor: ModbusDevice.Ctor = SimulatedModbusDevice
+  implicit val ctor = SimulatedModbusDevice
 
   lazy val networkNavigable = network.loc.cojoin.toTree
 

@@ -51,7 +51,7 @@ trait SensorService extends HttpService {
     path("devices" / "1") {
       get {
         complete {
-          Devices.mk42i(name = "42i", id = "00:11:22:33:44:01", hostname = "localhost", port = 9501)(SimulatedModbusDevice).asInstanceOf[SimulatedModbusDevice]
+          Devices.mk42i(name = "42i", id = "00:11:22:33:44:01", hostname = "localhost", port = 9501)(SimulatedModbusDevice)
         }
       }
     }

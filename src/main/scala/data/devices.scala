@@ -5,7 +5,7 @@ import model.ModbusDevice
 
 object Devices {
 
-  def mk42i(name: String, id: String, hostname: String, port: Int)(implicit ctor: ModbusDevice.Ctor) = ctor(
+  def mk42i[D](name: String, id: String, hostname: String, port: Int)(implicit ctor: ModbusDevice.Ctor[D]): D = ctor(
     name, id, hostname, port,
     Map(
       "unit" -> Pair("ppb", "ug/m3")
@@ -17,7 +17,7 @@ object Devices {
     )
   )
 
-  def mk49i(name: String, id: String, hostname: String, port: Int)(implicit ctor: ModbusDevice.Ctor) = ctor(
+  def mk49i[D](name: String, id: String, hostname: String, port: Int)(implicit ctor: ModbusDevice.Ctor[D]): D = ctor(
     name, id, hostname, port,
     Map(
       "unit" -> Pair("ppb", "ug/m3")
