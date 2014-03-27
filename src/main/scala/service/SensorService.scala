@@ -1,4 +1,5 @@
-package edu.luc.etl.ccacw.sensor.service
+package edu.luc.etl.ccacw.sensor
+package service
 
 import akka.actor.Actor
 import spray.routing._
@@ -6,9 +7,8 @@ import spray.http._
 import MediaTypes._
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
-import DefaultJsonProtocol._
-import edu.luc.etl.ccacw.sensor.model.SimulatedModbusDevice
-import edu.luc.etl.ccacw.sensor.data.Devices
+import model.SimulatedModbusDevice
+import data.Devices
 
 // we don't implement our route structure directly in the service actor because
 // we want to be able to test it independently, without having to spin up an actor
@@ -24,15 +24,16 @@ class SensorServiceActor extends Actor with SensorService {
   def receive = runRoute(myRoute)
 }
 
-
-object SensorServiceJsonProcotol extends SprayJsonSupport with DefaultJsonProtocol {
+trait SensorServiceJsonProcotol extends SprayJsonSupport with DefaultJsonProtocol {
   implicit val simulatedModbusDeviceFormat = jsonFormat6(SimulatedModbusDevice.apply)
 }
 
 // this trait defines our service behavior independently from the service actor
-trait SensorService extends HttpService {
+trait SensorService extends HttpService with SensorServiceJsonProcotol {
 
-  import SensorServiceJsonProcotol._
+  val network = data.network
+  // TODO push cast into mashaler
+  lazy val devices = network.flatten flatMap { _.devices } map { _.asInstanceOf[SimulatedModbusDevice] }
 
   val myRoute =
     path("") {
@@ -41,17 +42,26 @@ trait SensorService extends HttpService {
           complete {
             <html>
               <body>
-                <h1>Say hello to <i>spray-routing</i> on <i>spray-can</i>!</h1>
+                <h1>CCACW Sensor Proxy</h1>
+                <p><a href="devices">devices</a></p>
+                <p>More functionality coming soon...</p>
               </body>
             </html>
           }
         }
       }
     } ~
-    path("devices" / "1") {
-      get {
-        complete {
-          Devices.mk42i(name = "42i", id = "00:11:22:33:44:01", hostname = "localhost", port = 9501)(SimulatedModbusDevice.apply)
+    pathPrefix("devices") {
+      path("(?:[0-9a-fA-F][0-9a-fA-F]:){5}[0-9a-fA-F][0-9a-fA-F]".r) { ident =>
+        get {
+          devices find { _.id == ident } map { complete(_) } getOrElse reject
+        }
+      } ~
+      pathEndOrSingleSlash {
+        get {
+          complete {
+            devices
+          }
         }
       }
     }

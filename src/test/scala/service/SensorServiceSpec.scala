@@ -12,7 +12,19 @@ class SensorServiceSpec extends Specification with Specs2RouteTest with SensorSe
 
     "return a greeting for GET requests to the root path" in {
       Get() ~> myRoute ~> check {
-        responseAs[String] must contain("Say hello")
+        responseAs[String] must contain("Sensor Proxy")
+      }
+    }
+
+    "return the list of all devices" in {
+      Get("/devices") ~> myRoute ~> check {
+        responseAs[String] must contain("00:11:22:33:44:01")
+      }
+    }
+
+    "find a device by id" in {
+      Get("/devices/00:11:22:33:44:01") ~> myRoute ~> check {
+        responseAs[String] must contain("00:11:22:33:44:01")
       }
     }
 
