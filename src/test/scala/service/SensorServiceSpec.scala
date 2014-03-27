@@ -28,6 +28,12 @@ class SensorServiceSpec extends Specification with Specs2RouteTest with SensorSe
       }
     }
 
+    "find a device by id using dashes" in {
+      Get("/devices/00-11-22-33-44-01") ~> myRoute ~> check {
+        responseAs[String] must contain("00:11:22:33:44:01")
+      }
+    }
+
     "list all of a device's settings" in {
       Get("/devices/00:11:22:33:44:01/settings") ~> myRoute ~> check {
         responseAs[String] must beEqualTo("""["unit"]""")
