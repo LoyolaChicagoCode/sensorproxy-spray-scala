@@ -48,20 +48,55 @@ trait SensorService extends HttpService with SensorServiceJsonProcotol {
               </body>
             </html>
           }
+        } ~
+        respondWithMediaType(`application/json`) {
+          complete { Seq("devices") }
         }
       }
     } ~
     pathPrefix("devices") {
-      path("(?:[0-9a-fA-F][0-9a-fA-F]:){5}[0-9a-fA-F][0-9a-fA-F]".r) { ident =>
-        get {
-          devices find { _.id == ident } map { complete(_) } getOrElse reject
-        }
-      } ~
-      pathEndOrSingleSlash {
-        get {
-          complete {
-            devices
-          }
+      get {
+        pathEndOrSingleSlash {
+          complete { devices }
+        } ~
+        pathPrefix("(?:[0-9a-fA-F][0-9a-fA-F]:){5}[0-9a-fA-F][0-9a-fA-F]".r) { ident =>
+          // TODO try to simplify this logic using monad transformer
+          devices find { _.id == ident } map { device =>
+            pathEndOrSingleSlash {
+              complete { device }
+            } ~
+            pathPrefix("settings") {
+              pathEndOrSingleSlash {
+                complete { device.settings.keys }
+              } ~
+              path(Segment) { setting =>
+                device.settings.get(setting) map { complete(_) } getOrElse reject
+              }
+            } ~
+            pathPrefix("measurements") {
+              pathEndOrSingleSlash {
+                complete { device.measurements.keys }
+              } ~
+              pathPrefix(Segment) { measurement =>
+                pathEndOrSingleSlash {
+                  complete { Seq("readings") }
+                } ~
+                pathPrefix("readings") {
+                  pathEndOrSingleSlash {
+                    device.measurements.get(measurement) map {
+                      readings => complete(readings.keys)
+                    } getOrElse reject
+                  } ~ path(Segment) { reading =>
+                    val r = for {
+                      m <- device.measurements.get(measurement)
+                      r <- m.get(reading)
+                    } yield r
+                    r map { r => complete(r().toString) } getOrElse reject
+                  }
+                }
+              }
+            }
+          } getOrElse reject
         }
       }
     }
