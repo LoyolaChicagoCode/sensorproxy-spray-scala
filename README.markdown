@@ -33,11 +33,11 @@ sample resources:
   - [root](http://luc-sensorproxy-spray.herokuapp.com)
   - [all devices](http://luc-sensorproxy-spray.herokuapp.com/devices)
   - [a specific device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01)
-  - [all settings of this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00:11:22:33:44:01/settings)
-  - [a specific setting value of this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00:11:22:33:44:01/settings/unit)
-  - [all measurements provided this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00:11:22:33:44:01/measurements)
-  - [all no2 readings provided by this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00:11:22:33:44:01/measurements/no2/readings)
-  - [current (simulated) no2 reading provided by this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00:11:22:33:44:01/measurements/no2/readings/current)
+  - [all settings of this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01/settings)
+  - [a specific setting value of this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01/settings/unit)
+  - [all measurements provided this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01/measurements)
+  - [all no2 readings provided by this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01/measurements/no2/readings)
+  - [current (simulated) no2 reading provided by this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01/measurements/no2/readings/current)
 
 # References
 

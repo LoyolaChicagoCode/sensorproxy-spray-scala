@@ -59,9 +59,9 @@ trait SensorService extends HttpService with SensorServiceJsonProcotol {
         pathEndOrSingleSlash {
           complete { devices }
         } ~
-        pathPrefix("(?:[0-9a-fA-F][0-9a-fA-F]:){5}[0-9a-fA-F][0-9a-fA-F]".r) { ident =>
+        pathPrefix("""(?:[0-9a-fA-F][0-9a-fA-F](?::|-)){5}[0-9a-fA-F][0-9a-fA-F]""".r) { ident =>
           // TODO try to simplify this logic using monad transformer
-          devices find { _.id == ident } map { device =>
+          devices find { _.id == ident.replaceAll("-", ":") } map { device =>
             pathEndOrSingleSlash {
               complete { device }
             } ~
