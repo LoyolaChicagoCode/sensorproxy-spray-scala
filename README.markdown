@@ -30,7 +30,7 @@ then please use [this workaround](http://laufer.tumblr.com/post/80793055563).
 A service instance is available on Heroku and provides the following
 sample resources:
 
-  - [root](http://luc-sensorproxy-spray.herokuapp.com)
+  - <a href="http://luc-sensorproxy-spray.herokuapp.com">root</a>
   - [all devices](http://luc-sensorproxy-spray.herokuapp.com/devices)
   - [a specific device](http://luc-sensorproxy-spray.herokuapp.com/devices/00:11:22:33:44:01 )
   - [all settings of this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00:11:22:33:44:01/settings)
