@@ -4,6 +4,7 @@ import org.specs2.mutable.Specification
 import spray.testkit.Specs2RouteTest
 import spray.http._
 import StatusCodes._
+import spray.json._
 
 class SensorServiceSpec extends Specification with Specs2RouteTest with SensorService {
   def actorRefFactory = system
@@ -36,13 +37,13 @@ class SensorServiceSpec extends Specification with Specs2RouteTest with SensorSe
 
     "list all of a device's settings" in {
       Get("/devices/00:11:22:33:44:01/settings") ~> myRoute ~> check {
-        responseAs[String] must beEqualTo("""["unit"]""")
+        responseAs[JsArray] must beEqualTo(JsArray(JsString("unit")))
       }
     }
 
     "read a specific device setting" in {
       Get("/devices/00:11:22:33:44:01/settings/unit") ~> myRoute ~> check {
-        responseAs[String] must beEqualTo("ppb")
+        responseAs[JsArray] must beEqualTo(JsArray(JsString("ppb")))
       }
     }
 
@@ -66,7 +67,7 @@ class SensorServiceSpec extends Specification with Specs2RouteTest with SensorSe
 
     "obtain a specific reading for a measurement provided by a device" in {
       Get("/devices/00:11:22:33:44:01/measurements/no2/readings/current") ~> myRoute ~> check {
-        responseAs[String].toFloat must be beBetween(0, 100)
+        responseAs[JsArray].elements(0).toString.replaceAll("\"", "").toFloat must be beBetween(0, 100)
       }
     }
 

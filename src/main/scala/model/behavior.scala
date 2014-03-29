@@ -6,6 +6,13 @@ import scalaz.syntax.tree._
 
 package object model {
 
+  type Settings = Map[String, String]
+  type Readings = Map[String, () => Float]
+  type Measurements = Map[String, Readings]
+
+  type DeviceSettings = Map[String, Pair[String, String]]
+  type DeviceRegisters = Map[String, Map[String, Int]]
+
   implicit object shr extends Show[Resource] { override def shows(r: Resource) = r.toString }
 
   implicit object shl extends Show[TreeLoc[Resource]] { override def shows(r: TreeLoc[Resource]) = "->" + r.toString }
