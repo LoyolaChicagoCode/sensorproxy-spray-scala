@@ -37,6 +37,8 @@ trait SensorService extends HttpService with SensorServiceJsonProcotol {
   lazy val devices = network.flatten flatMap { _.devices } map { _.asInstanceOf[SimulatedModbusDevice] }
 
   // TODO move to model?
+  // Extra layer between model and routes required to support flat "route-centric" routes.
+  // The real KL suspects that JAX-RS would require something similar.
   def getDevice(ident: String) = devices find { _.id == ident.replaceAll("-", ":") }
   def getSettingKeys(ident: String) = getDevice(ident) map { _.settings.keys }
   def getSetting(ident: String, setting: String) = for {
