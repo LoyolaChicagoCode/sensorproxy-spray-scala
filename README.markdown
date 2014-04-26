@@ -39,8 +39,10 @@ sample resources:
   - [all no2 readings provided by this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01/measurements/no2/readings)
   - [current (simulated) no2 reading provided by this device](http://luc-sensorproxy-spray.herokuapp.com/devices/00-11-22-33-44-01/measurements/no2/readings/current)
 
+A live demo of this service with visualization is available [here](http://webpages.cs.luc.edu/~laufer/cuerp).
+
 # References
 
-- [Earlier version implemented in Java using Restlet](http://webpages.cs.luc.edu/~laufer/cuerp)
+- [Earlier version implemented in Java using Restlet](http://code.google.com/p/ccacw)
 - [Stasiuk, Läufer, and Thiruvathukal, *Network Technologies used to Aggregate Environmental Data: Research Poster*, GCASR 2013](http://ecommons.luc.edu/cs_facpubs/65/)
 - [Kaylor, Läufer, and Thiruvathukal, *REST on Routers? Preliminary Lessons for Language Designers, Framework Architects, and App Developers*, ICSOFT 2011](http://ecommons.luc.edu/cs_facpubs/35/)
