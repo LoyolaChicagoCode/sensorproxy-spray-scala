@@ -1,2 +1,6 @@
 language: scala
 scala: 2.10.4
+deploy:
+  provider: heroku
+  app: luc-sensorproxy-spray
+  secure: "VdUDcWIAFKW8SVpLqlFSFYZlDIvmn+7FK7/YRoWuRejiYkJZVreS/ltwmgBON7sY1OLXvUPyWYjGFuU/7rNP8iCBA4fWSwqPx37a9x6GY5z8LT8w0mNp34pD8wowd56bw8jov6tCi7l+3txkI7vrb2RUaHPJUjRJVWWH3zaSMyc="
