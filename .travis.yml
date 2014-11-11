@@ -2,5 +2,8 @@ language: scala
 scala: 2.10.4
 deploy:
   provider: heroku
+  api_key:
+    secure: yet+UY3RYj24KSdUSf3cJeGBwq0pOQwfWP9gacmxXdawzr23mdjSmOXZ47a9H/KmF7r7EPAzwsZPwEYwlOXG/71YmAXLeeK7QJ7Qka4KBID++vdm5MyNsuFJEdT8wlkMYpmE9uQegNszK0Am4+2cIrZaDef+jj1iAeiJJ8f5+YY=
   app: luc-sensorproxy-spray
-  secure: "VdUDcWIAFKW8SVpLqlFSFYZlDIvmn+7FK7/YRoWuRejiYkJZVreS/ltwmgBON7sY1OLXvUPyWYjGFuU/7rNP8iCBA4fWSwqPx37a9x6GY5z8LT8w0mNp34pD8wowd56bw8jov6tCi7l+3txkI7vrb2RUaHPJUjRJVWWH3zaSMyc="
+  on:
+    repo: klaeufer/sensorproxy-spray-scala
