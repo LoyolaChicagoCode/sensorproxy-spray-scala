@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/klaeufer/sensorproxy-spray-scala.svg)](https://travis-ci.org/klaeufer/sensorproxy-spray-scala)
+[![Build Status](https://travis-ci.org/webservices-cs-luc-edu/sensorproxy-spray-scala.svg)](https://travis-ci.org/webservices-cs-luc-edu/sensorproxy-spray-scala)
 
 # Overview
 
