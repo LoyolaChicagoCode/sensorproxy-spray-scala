@@ -1,9 +1,10 @@
 language: scala
 scala: 2.10.4
 deploy:
-  provider: heroku
-  api_key:
-    secure: yet+UY3RYj24KSdUSf3cJeGBwq0pOQwfWP9gacmxXdawzr23mdjSmOXZ47a9H/KmF7r7EPAzwsZPwEYwlOXG/71YmAXLeeK7QJ7Qka4KBID++vdm5MyNsuFJEdT8wlkMYpmE9uQegNszK0Am4+2cIrZaDef+jj1iAeiJJ8f5+YY=
-  app: luc-sensorproxy-spray
   on:
     repo: klaeufer/sensorproxy-spray-scala
+  provider: heroku
+  app: luc-sensorproxy-spray
+  strategy: git
+  api_key:
+    secure: yet+UY3RYj24KSdUSf3cJeGBwq0pOQwfWP9gacmxXdawzr23mdjSmOXZ47a9H/KmF7r7EPAzwsZPwEYwlOXG/71YmAXLeeK7QJ7Qka4KBID++vdm5MyNsuFJEdT8wlkMYpmE9uQegNszK0Am4+2cIrZaDef+jj1iAeiJJ8f5+YY=
