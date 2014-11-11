@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/klaeufer/sensorproxy-spray-scala.svg)](https://travis-ci.org/klaeufer/sensorproxy-spray-scala)
+
 # Overview
 
 A RESTful web service for exposing a collection of network-capable
